@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard - Resource System</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>User Portal</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="my-bookings.html">My Bookings</a></li>
+                <li><a href="my-payments.html">Payment History</a></li>
+                <li><a href="my-fines.html">My Fines</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome, <span id="userName">User</span></h1>
+        <div class="stats-container">
+            <div class="card border-blue">
+                <h3>Active Bookings</h3>
+                <div class="value" id="activeBookings">0</div>
+            </div>
+            <div class="card border-red">
+                <h3>Outstanding Fines</h3>
+                <div class="value" id="userFines">₹0</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script>
+        // Personalize the dashboard
+        document.getElementById('userName').innerText = localStorage.getItem('userName') || 'User';
+    </script>
+</body>
+</html>

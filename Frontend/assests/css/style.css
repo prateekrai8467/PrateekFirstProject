@@ -1,0 +1,66 @@
+/* frontend/assets/css/style.css */
+:root {
+    --sidebar-bg: #1e293b;
+    --sidebar-hover: #334155;
+    --accent-blue: #3b82f6;
+    --text-white: #f8fafc;
+    --main-bg: #f1f5f9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    background-color: var(--main-bg);
+    color: #1e293b;
+}
+
+/* Sidebar Layout */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    color: var(--text-white);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 1.2rem;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #334155;
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.sidebar nav ul li a:hover, .sidebar nav ul li a.active {
+    background-color: var(--sidebar-hover);
+    color: var(--text-white);
+    border-left: 4px solid var(--accent-blue);
+}
+
+/* Main Area */
+.main-content {
+    margin-left: 260px;
+    padding: 30px;
+    width: calc(100% - 260px);
+}

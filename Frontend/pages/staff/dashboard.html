@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Dashboard - Resource System</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Staff Portal</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="resources.html">View Resources</a></li>
+                <li><a href="allocate-resource.html">New Allocation</a></li>
+                <li><a href="bookings.html">Manage Bookings</a></li>
+                <li><a href="payments.html">Payments</a></li>
+                <li><a href="fines.html">Fines</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1>Staff Operations</h1>
+        <div class="stats-container">
+            <div class="card border-blue">
+                <h3>Available Rooms</h3>
+                <div class="value" id="availableRooms">0</div>
+            </div>
+            <div class="card border-green">
+                <h3>Today's Bookings</h3>
+                <div class="value" id="todayBookings">0</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button class="btn-login" onclick="location.href='allocate-resource.html'" style="width: auto; padding: 15px 30px;">
+                + Start New Allocation
+            </button>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+</body>
+</html>

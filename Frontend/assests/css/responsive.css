@@ -1,0 +1,19 @@
+/* frontend/assets/css/responsive.css */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+    
+    .sidebar h2, .sidebar nav ul li a span {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+}

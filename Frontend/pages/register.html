@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Resource Management System</title>
+    <link rel="stylesheet" href="../assests/css/auth.css">
+    <link rel="stylesheet" href="../assests/css/auth.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h1>Create Account</h1>
+            <p style="text-align: center; color: #64748b; margin-bottom: 20px;">
+                Join the Resource Management portal.
+            </p>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" placeholder="john@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Minimum 8 characters" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">I am a:</label>
+                    <select id="role" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                        <option value="user">General User (Student/Member)</option>
+                        <option value="staff">Staff Member</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-login" style="background: #10b981;">Register</button>
+            </form>
+
+            <div style="margin-top: 20px; text-align: center; font-size: 0.9rem;">
+                Already have an account? <a href="login.html" style="color: #3b82f6; text-decoration: none;">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assests/js/api.js"></script>
+    <script src="../assests/js/auth.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const role = document.getElementById('role').value;
+
+            try {
+                await API.request('/auth/register', 'POST', { name, email, password, role });
+                alert('Registration successful! Please login.');
+                window.location.href = 'login.html';
+            } catch (err) {
+                alert('Registration failed: ' + err.message);
+            }
+        });
+    </script>
+</body>
+</html>

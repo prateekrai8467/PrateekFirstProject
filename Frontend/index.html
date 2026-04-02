@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Management & Allocation System</title>
+    
+    <link rel="stylesheet" href="../Frontend/assests/css/style.css">
+    
+    <style>
+        /* Specific styles for the landing page hero section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Fallback color if image is missing */
+            background: #1e293b; 
+            background: linear-gradient(rgba(30, 41, 59, 0.85), rgba(30, 41, 59, 0.85)), 
+                        url('assets/images/hero-bg.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font size */
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            border: 1px solid #3b82f6;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: #1e293b;
+            transform: translateY(-3px);
+        }
+
+        .features-grid {
+            padding: 100px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-item h3 {
+            margin: 15px 0;
+            color: #1e293b;
+            font-size: 1.5rem;
+        }
+
+        .feature-item p {
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f8fafc;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <img src="./assests/css/" alt="RMS Logo" onerror="this.style.display='none'" style="width: 100px; margin-bottom: 20px;">
+        <h1>Smart Resource Allocation</h1>
+        <p>
+            The centralized digital core for institutional efficiency. 
+            Manage classrooms, library assets, and high-value equipment with real-time transparency.
+        </p>
+        
+        <div class="cta-buttons">
+            <a href="./pages/login.html" class="btn btn-primary">Login to Portal</a>
+            <a href="./pages/register.html" class="btn btn-outline">Join the System</a>
+        </div>
+    </section>
+
+    <section class="features-grid">
+        <div class="feature-item">
+            <div style="font-size: 3rem;">🏢</div>
+            <h3>Room Management</h3>
+            <p>Real-time tracking of classrooms and labs. Prevent double-bookings with automated scheduling logic.</p>
+        </div>
+        <div class="feature-item">
+            <div style="font-size: 3rem;">📚</div>
+            <h3>Asset Tracking</h3>
+            <p>Seamlessly manage library books and equipment. Automated late-return fine calculation included.</p>
+        </div>
+        <div class="feature-item">
+            <div style="font-size: 3rem;">🔐</div>
+            <h3>Secure Roles</h3>
+            <p>Dedicated access control for Admins, Staff, and Users ensures data integrity and security.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Resource Management System | Built with Node.js & MySQL</p>
+    </footer>
+
+    <script>
+        // Redirect logic to ensure logged-in users bypass the landing page
+        window.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            let role = localStorage.getItem('role');
+            
+            if (token && role) {
+                // Convert role to lowercase to match your folder structure
+                // e.g., "Admin" becomes "admin"
+                const folder = role.toLowerCase(); 
+                window.location.href = `pages/${folder}/dashboard.html`;
+            }
+        });
+    </script>
+</body>
+</html>
