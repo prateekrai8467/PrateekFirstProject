@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Resource Management System</title>
-    <link rel="stylesheet" href="../assests/css/auth.css">
-    <link rel="stylesheet" href="../assests/css/auth.css">
+    <link rel="stylesheet" href="../assets/css/auth.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <div class="auth-wrapper">
@@ -27,6 +27,11 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="regPhone">Phone Number</label>
+                    <input type="tel" id="regPhone" placeholder="1234567890">
+                </div>
+                
+                <div class="form-group">
                     <label for="regPassword">Password</label>
                     <input type="password" id="regPassword" placeholder="Minimum 8 characters" required>
                 </div>
@@ -34,8 +39,8 @@
                 <div class="form-group">
                     <label for="role">I am a:</label>
                     <select id="role" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
-                        <option value="user">General User (Student/Member)</option>
-                        <option value="staff">Staff Member</option>
+                        <option value="student">General User (Student/Member)</option>
+                        <option value="faculty">Staff Member</option>
                     </select>
                 </div>
 
@@ -48,8 +53,8 @@
         </div>
     </div>
 
-    <script src="../assests/js/api.js"></script>
-    <script src="../assests/js/auth.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
     <script>
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -57,9 +62,10 @@
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
             const role = document.getElementById('role').value;
+            const phone = document.getElementById('regPhone').value;
 
             try {
-                await API.request('/auth/register', 'POST', { name, email, password, role });
+                await API.request('/auth/register', 'POST', { name, email, password, role, phone });
                 alert('Registration successful! Please login.');
                 window.location.href = 'login.html';
             } catch (err) {

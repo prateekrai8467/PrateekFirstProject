@@ -1,0 +1,74 @@
+[
+  {
+    "user_id": 1,
+    "name": "Sanjana Prasad",
+    "email": "sanjana1419@gmail.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "student",
+    "phone": "9876543210",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  },
+  {
+    "user_id": 2,
+    "name": "Aman Sharma",
+    "email": "amansharma9988@gmail.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "faculty",
+    "phone": "9876543211",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  },
+  {
+    "user_id": 3,
+    "name": "Riya Verma",
+    "email": "riya1261@gmail.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "admin",
+    "phone": "9876543212",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  },
+  {
+    "user_id": 4,
+    "name": "Kunal Singh",
+    "email": "kunal@gmail.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "student",
+    "phone": "9876543213",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  },
+  {
+    "user_id": 5,
+    "name": "Prateek Rai",
+    "email": "prateek@example.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "student",
+    "phone": "9876543210",
+    "created_at": "2026-04-03T10:50:35.000Z"
+  },
+  {
+    "user_id": 6,
+    "name": "Vishal ",
+    "email": "vishalexample@gmail.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "faculty",
+    "phone": "8467987332",
+    "created_at": "2026-04-06T15:23:05.000Z"
+  },
+  {
+    "user_id": 7,
+    "name": "Test User",
+    "email": "test13@test.com",
+    "password": "$2a$10$bFNFJryEwas5B3H/NEOD3eIbdc1oNrsXJ.OCqxt806pnq6v1PEBFS",
+    "role": "student",
+    "phone": "123456",
+    "created_at": "2026-04-06T15:52:27.000Z"
+  },
+  {
+    "user_id": 8,
+    "name": "Test Staff",
+    "email": "staff@test.com",
+    "password": "$2a$10$7EpwmtmDzzaPH4pzpWFLzesAZxHH5nO7d346ficJO3/c5gnGhcgYe",
+    "role": "faculty",
+    "phone": "123456",
+    "created_at": "2026-04-08T14:14:18.000Z"
+  }
+]

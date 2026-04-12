@@ -1,11 +1,14 @@
 /* src/controller/authController.js */
-const User = require('../modals/userModel'); 
+const User = require('../models/userModels'); 
 const { hashPassword, comparePassword } = require('../utils/hashPassword');
 const generateToken = require('../utils/generateToken');
 
 exports.register = async (req, res) => {
     try {
-        const { name, email, password, role, phone } = req.body;
+        let { name, email, password, role, phone } = req.body;
+        
+        // Prevent undefined error by defaulting strictly to null
+        phone = phone || null;
 
         // 1. Check if user exists
         const existingUser = await User.findByEmail(email);

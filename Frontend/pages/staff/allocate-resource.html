@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Allocate Resource - Staff Portal</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Staff Portal</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="resources.html">View Resources</a></li>
+                <li><a href="allocate-resource.html" class="active">New Allocation</a></li>
+                <li><a href="booking.html">Manage Bookings</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1>Allocate New Resource</h1>
+        
+        <div class="card" style="max-width: 600px; margin-top: 20px;">
+            <form id="allocateResourceForm" onsubmit="submitStaffBooking(event)">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Resource / Room ID</label>
+                    <input type="number" id="bookRoomId" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Date</label>
+                    <input type="date" id="bookDate" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div style="flex: 1;">
+                        <label>Start Time</label>
+                        <input type="time" id="bookStart" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>End Time</label>
+                        <input type="time" id="bookEnd" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>Purpose</label>
+                    <textarea id="bookPurpose" rows="3" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-login" style="padding: 12px 20px;">Submit Allocation</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script>
+        async function submitStaffBooking(e) {
+            e.preventDefault();
+            const userId = localStorage.getItem('userId');
+            
+            if (!userId) {
+                alert("User ID not found in session. Please login again.");
+                return;
+            }
+
+            const roomId = document.getElementById('bookRoomId').value;
+            const date = document.getElementById('bookDate').value;
+            const start = document.getElementById('bookStart').value;
+            const end = document.getElementById('bookEnd').value;
+            const purpose = document.getElementById('bookPurpose').value;
+
+            try {
+                await API.request('/bookings/new', 'POST', {
+                    user_id: parseInt(userId),
+                    room_id: parseInt(roomId),
+                    booking_date: date,
+                    start_time: start,
+                    end_time: end,
+                    purpose: purpose,
+                    resources: []
+                });
+                
+                alert("Allocation request submitted successfully.");
+                document.getElementById('allocateResourceForm').reset();
+                window.location.href = 'booking.html'; // Redirect to bookings page to see requests
+            } catch (error) {
+                alert('Failed to submit allocation: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

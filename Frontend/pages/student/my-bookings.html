@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <meta charset="UTF-8">
+    <title>My Bookings</title>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>User Portal</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="my-bookings.html">My Bookings</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>My Booking History</h1>
+            <button class="btn-login" style="width: auto; padding: 10px 20px;" onclick="openBookResourceModal()">+ Request Booking</button>
+        </div>
+
+        <!-- Book Resource Modal -->
+        <div id="bookResourceModal" class="modal">
+            <div class="modal-content">
+                <h2>Request a Resource</h2>
+                <form id="bookResourceForm" onsubmit="submitBooking(event)">
+                    <input type="number" id="bookRoomId" placeholder="Room ID (e.g. 1)" required>
+                    <input type="date" id="bookDate" required>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="time" id="bookStart" required style="flex:1">
+                        <input type="time" id="bookEnd" required style="flex:1">
+                    </div>
+                    <textarea id="bookPurpose" placeholder="Purpose of Booking" rows="3" required></textarea>
+                    
+                    <div style="margin-top: 15px; text-align: left;">
+                        <label style="cursor: pointer;">
+                            <input type="checkbox" id="needResourcesCheckbox" onchange="toggleResourceSection()">
+                            I need additional resources (e.g., Projector)
+                        </label>
+                    </div>
+
+                    <div id="resourceSection" style="display: none; margin-top: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: #f9f9f9;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <select id="resourceSelect" style="flex:2; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="">Select Resource</option>
+                            </select>
+                            <input type="number" id="resourceQuantity" placeholder="Qty" style="flex:1" min="1">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions" style="margin-top: 20px;">
+                        <button type="button" class="btn-cancel" onclick="closeBookResourceModal()">Cancel</button>
+                        <button type="submit" class="btn-login" style="width:auto; padding:10px 20px;">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-wrapper" style="margin-top: 20px;">
+            <table id="userBookingTable">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Room No</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="userBookingList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/bookings.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+</body>
+</html>

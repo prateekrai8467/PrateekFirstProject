@@ -9,11 +9,9 @@ const authRoutes = require('./src/routes/authRoutes');
 const userRoutes = require('./src/routes/userRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
 const staffRoutes = require('./src/routes/staffRoutes');
-const resourceRoutes = require('./src/routes/resourceRoutes');
+const resourceRoutes = require('./src/routes/resourcesRoutes');
 const bookingRoutes = require('./src/routes/bookingRoutes');
 const allocationRoutes = require('./src/routes/allocationRoutes');
-const paymentRoutes = require('./src/routes/paymentRoutes');
-const fineRoutes = require('./src/routes/fineRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -32,8 +30,6 @@ app.use('/api/staff', staffRoutes);
 app.use('/api/resources', resourceRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/allocations', allocationRoutes);
-app.use('/api/payments', paymentRoutes);
-app.use('/api/fines', fineRoutes);
 
 // Root Route (for testing if server is alive)
 app.get('/', (req, res) => {

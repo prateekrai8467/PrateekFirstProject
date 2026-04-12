@@ -14,3 +14,15 @@ exports.getProfile = async (req, res) => {
         res.status(500).json({ message: "Error fetching profile" });
     }
 };
+
+exports.updateProfile = async (req, res) => {
+    res.status(501).json({ message: "Not Implemented" });
+};
+
+exports.getMyActiveBookings = async (req, res) => {
+    res.status(501).json({ message: "Not Implemented" });
+};
+
+exports.getDashboardSummary = async (req, res) => {
+    res.status(501).json({ message: "Not Implemented" });
+};

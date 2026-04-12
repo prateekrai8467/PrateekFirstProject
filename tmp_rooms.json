@@ -1,0 +1,32 @@
+[
+  {
+    "room_id": 1,
+    "room_number": "A101",
+    "type": "classroom",
+    "capacity": 60,
+    "location": "Block A, Floor 1",
+    "description": null,
+    "status": "vacant",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  },
+  {
+    "room_id": 2,
+    "room_number": "B202",
+    "type": "lab",
+    "capacity": 40,
+    "location": "Block B, Floor 2",
+    "description": null,
+    "status": "vacant",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  },
+  {
+    "room_id": 3,
+    "room_number": "C303",
+    "type": "seminar_hall",
+    "capacity": 120,
+    "location": "Block C, Floor 3",
+    "description": null,
+    "status": "vacant",
+    "created_at": "2026-04-02T11:09:15.000Z"
+  }
+]

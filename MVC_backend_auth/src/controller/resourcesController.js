@@ -21,6 +21,31 @@ exports.getAllResources = async (req, res) => {
     }
 };
 
+// Add new resource item (Admin only)
+exports.addResource = async (req, res) => {
+    try {
+        const { resource_name, total_quantity, description } = req.body;
+        const sql = `INSERT INTO resources (resource_name, total_quantity, available_quantity, description) VALUES (?, ?, ?, ?)`;
+        await db.execute(sql, [resource_name, total_quantity, total_quantity, description]);
+        res.status(201).json({ message: "Resource added successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error adding resource", error: error.message });
+    }
+};
+
+// Edit resource
+exports.updateResource = async (req, res) => {
+    try {
+        const resourceId = req.params.id;
+        const { total_quantity } = req.body;
+        const sql = `UPDATE resources SET total_quantity = ?, available_quantity = ? WHERE resource_id = ?`;
+        await db.execute(sql, [total_quantity, total_quantity, resourceId]);
+        res.json({ message: "Resource updated successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating resource", error: error.message });
+    }
+};
+
 // Add new room (Admin only)
 exports.addRoom = async (req, res) => {
     try {

@@ -1,31 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Staff Management</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <meta charset="UTF-8">
+    <title>Manage Staff</title>
 </head>
 <body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="manage-staff.html">Manage Staff</a></li>
+                <li><a href="manage-users.html">Manage Users</a></li>
+                <li><a href="manage-resources.html">Resources</a></li>
+                <li><a href="view-allocation.html">Allocations</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="main-content">
-        <h1>Staff Members</h1>
-        <div class="table-wrapper">
-            <table id="staffTable">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Staff Members</h1>
+            <button class="btn-login" style="width: auto; padding: 10px 20px;" onclick="openAddUserModal()">+ Add Staff</button>
+        </div>
+
+        <!-- Add Staff Modal -->
+        <div id="addUserModal" class="modal">
+            <div class="modal-content">
+                <h2 id="modalTitle">Add New Staff</h2>
+                <form id="addUserForm" onsubmit="submitUser(event, 'faculty')">
+                    <input type="text" id="userName" placeholder="Full Name" required>
+                    <input type="email" id="userEmail" placeholder="Email Address" required>
+                    <input type="text" id="userPhone" placeholder="Phone Number" required>
+                    <input type="password" id="userPassword" placeholder="Temporary Password" required>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeAddUserModal()">Cancel</button>
+                        <button type="submit" class="btn-login" style="width:auto; padding:10px 20px;">Save Staff</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-wrapper" style="margin-top: 20px;">
+            <table id="userTable">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="staffList">
-                    </tbody>
+                <tbody id="userList">
+                </tbody>
             </table>
         </div>
     </div>
 
-    <script src="../../assets/js/api.js"></script>
-    <script src="../../assets/js/users.js"></script>
+    <script src="../../assets/js/api.js?v=2"></script>
+    <script src="../../assets/js/users.js?v=2"></script>
+    <script src="../../assets/js/auth.js?v=2"></script>
 </body>
 </html>

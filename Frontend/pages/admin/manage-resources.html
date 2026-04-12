@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Manage Resources</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <meta charset="UTF-8">
+    <title>Manage Resources</title>
 </head>
 <body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="manage-staff.html">Manage Staff</a></li>
+                <li><a href="manage-users.html">Manage Users</a></li>
+                <li><a href="manage-resources.html">Resources</a></li>
+                <li><a href="view-allocation.html">Allocations</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="main-content">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1>Resource Inventory</h1>
-            <button class="btn-login" style="width: auto; padding: 10px 20px;">+ Add Resource</button>
+            <button class="btn-login" style="width: auto; padding: 10px 20px;" onclick="openAddResourceModal()">+ Add Resource</button>
+        </div>
+
+        <!-- Add Resource Modal -->
+        <div id="addResourceModal" class="modal">
+            <div class="modal-content">
+                <h2>Add New Resource</h2>
+                <form id="addResourceForm" onsubmit="submitResource(event)">
+                    <input type="text" id="resName" placeholder="Resource Name" required>
+                    <input type="number" id="resQty" placeholder="Total Quantity" required>
+                    <input type="text" id="resDesc" placeholder="Description/Location" required>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeAddResourceModal()">Cancel</button>
+                        <button type="submit" class="btn-login" style="width:auto; padding:10px 20px;">Save Resource</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="table-wrapper" style="margin-top: 20px;">
@@ -18,18 +49,19 @@
                 <thead>
                     <tr>
                         <th>Resource Name</th>
-                        <th>Type</th>
+                        <th>Total Quantity</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
 
-    <script src="../../assets/js/api.js"></script>
-    <script src="../../assets/js/resources.js"></script>
+    <script src="../../assets/js/api.js?v=2"></script>
+    <script src="../../assets/js/resources.js?v=2"></script>
+    <script src="../../assets/js/auth.js?v=2"></script>
 </body>
 </html>

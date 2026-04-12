@@ -8,11 +8,9 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const staffRoutes = require('./routes/staffRoutes');
-const resourceRoutes = require('./routes/resourceRoutes');
+const resourceRoutes = require('./routes/resourcesRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const allocationRoutes = require('./routes/allocationRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
-const fineRoutes = require('./routes/fineRoutes');
 
 const { errorHandler } = require('./middleware/errorMiddleware');
 
@@ -30,8 +28,6 @@ app.use('/api/staff', staffRoutes);
 app.use('/api/resources', resourceRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/allocations', allocationRoutes);
-app.use('/api/payments', paymentRoutes);
-app.use('/api/fines', fineRoutes);
 // Must be the last middleware
 app.use(errorHandler);
 
