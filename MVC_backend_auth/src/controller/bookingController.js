@@ -85,7 +85,27 @@ exports.createBooking = async (req, res) => {
         }
 
         await connection.commit();
-        res.status(201).json({ message: "Booking request submitted", bookingId });
+
+        // Emit real-time notification for admins/staff
+        const io = req.app.get('socketio');
+        if (io) {
+            io.emit('new_booking', {
+                bookingId,
+                room_id,
+                booking_date,
+                message: 'A new booking request has been submitted.'
+            });
+            
+            if (resources && resources.length > 0) {
+                io.emit('resource_allocated', {
+                    bookingId,
+                    resources,
+                    message: `Resources allocated for booking #${bookingId}`
+                });
+            }
+        }
+
+        res.json({ message: "Booking request submitted", bookingId });
     } catch (error) {
         await connection.rollback();
         res.status(500).json({ message: "Booking failed: " + error.message, error: error.message });

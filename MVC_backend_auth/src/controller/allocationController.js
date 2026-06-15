@@ -21,6 +21,18 @@ exports.approveOrRejectBooking = async (req, res) => {
         );
 
         await connection.commit();
+
+        // Emit real-time notification
+        const io = req.app.get('socketio');
+        if (io) {
+            io.emit('booking_status_updated', {
+                booking_id,
+                status,
+                remarks,
+                message: `Booking has been ${status}`
+            });
+        }
+
         res.json({ message: `Booking ${status} successfully` });
     } catch (error) {
         await connection.rollback();
