@@ -137,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `audit_logs` (
 
 -- Users (passwords should be bcrypt hashed in production)
 INSERT INTO `users` (`name`, `email`, `password`, `role`, `phone`) VALUES
-('Sanjana Prasad', 'sanjana1419@gmail.com',  '$2b$10$placeholder_hash_1', 'student', '9876543210'),
+('Sanjana Prasad', 'sanjana1419@gmail.com',   '$2b$10$placeholder_hash_1', 'student', '9876543210'),
 ('Aman Sharma',    'amansharma9988@gmail.com','$2b$10$placeholder_hash_2', 'faculty', '9876543211'),
-('Riya Verma',     'riya1261@gmail.com',      '$2b$10$placeholder_hash_3', 'admin',   '9876543212'),
+('Riya Verma',     'rajnishmau2017@gmail.com','$2b$10$placeholder_hash_3', 'admin',   '9876543212'),
 ('Kunal Singh',    'kunal@gmail.com',         '$2b$10$placeholder_hash_4', 'student', '9876543213');
 
 -- Rooms
