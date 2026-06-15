@@ -115,6 +115,23 @@ CREATE TABLE IF NOT EXISTS `approvals` (
 
 
 -- ============================================================
+-- TABLE 7: audit_logs
+-- Enterprise Audit Trail for tracking changes
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `audit_logs` (
+  `log_id`      INT NOT NULL AUTO_INCREMENT,
+  `user_id`     INT DEFAULT NULL,            -- Can be null if system action
+  `action`      VARCHAR(255) NOT NULL,
+  `old_value`   TEXT DEFAULT NULL,
+  `new_value`   TEXT DEFAULT NULL,
+  `timestamp`   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `audit_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- ============================================================
 -- SAMPLE DATA (Seed)
 -- ============================================================
 
