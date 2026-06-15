@@ -4,14 +4,14 @@ const db = require('../config/db');
 exports.getSystemStats = async (req, res) => {
     try {
         // Run multiple counts in parallel for performance
-        const [roomCount] = await db.execute("SELECT COUNT(*) as total FROM rooms");
-        const [activeBookings] = await db.execute("SELECT COUNT(*) as total FROM bookings WHERE status = 'approved'");
+        const [resourceCount] = await db.execute("SELECT COUNT(*) as total FROM resources");
+        const [allocationCount] = await db.execute("SELECT COUNT(*) as total FROM bookings");
         const [userCount] = await db.execute("SELECT COUNT(*) as total FROM users WHERE role = 'student'");
         const [staffCount] = await db.execute("SELECT COUNT(*) as total FROM users WHERE role = 'faculty'");
 
         res.json({
-            totalRooms: roomCount[0].total,
-            activeAllocations: activeBookings[0].total,
+            totalResources: resourceCount[0].total,
+            totalAllocations: allocationCount[0].total,
             totalUsers: userCount[0].total,
             totalStaff: staffCount[0].total
         });

@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', async function loadDashboardStats(
         const userEl = document.getElementById('totalUsers');
         const staffEl = document.getElementById('totalStaff');
 
-        if (resEl) resEl.innerText = stats.totalRooms || 0;
-        if (allocEl) allocEl.innerText = stats.activeAllocations || 0;
+        if (resEl) resEl.innerText = stats.totalResources || 0;
+        if (allocEl) allocEl.innerText = stats.totalAllocations || 0;
         if (userEl) userEl.innerText = stats.totalUsers || 0;
         if (staffEl) staffEl.innerText = stats.totalStaff || 0;
         

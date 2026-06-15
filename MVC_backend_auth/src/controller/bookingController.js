@@ -8,6 +8,21 @@ exports.createBooking = async (req, res) => {
 
         const { user_id, room_id, booking_date, start_time, end_time, purpose, resources } = req.body;
 
+        // Smart Conflict Detection: Check if the room is already booked for overlapping time
+        const [conflicts] = await connection.execute(
+            `SELECT booking_id FROM bookings 
+             WHERE room_id = ? 
+               AND booking_date = ? 
+               AND status IN ('pending', 'approved') 
+               AND (start_time < ? AND end_time > ?)`,
+            [room_id, booking_date, end_time, start_time]
+        );
+
+        if (conflicts.length > 0) {
+            await connection.rollback();
+            return res.status(409).json({ message: "Conflict: Room is already booked for the selected time." });
+        }
+
         // 1. Insert into bookings table
         const [bookingResult] = await connection.execute(
             `INSERT INTO bookings (user_id, room_id, booking_date, start_time, end_time, purpose) VALUES (?, ?, ?, ?, ?, ?)`,
