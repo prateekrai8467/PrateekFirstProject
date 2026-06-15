@@ -33,6 +33,42 @@ exports.createBooking = async (req, res) => {
 
         // 2. If resources (equipment) are requested, link them
         if (resources && resources.length > 0) {
+            // Check availability for all requested resources before allocating
+            for (let item of resources) {
+                const [resDetails] = await connection.execute(
+                    `SELECT resource_name, total_quantity FROM resources WHERE resource_id = ?`, 
+                    [item.resource_id]
+                );
+                
+                if (resDetails.length === 0) continue;
+                
+                const totalQuantity = resDetails[0].total_quantity;
+                const resourceName = resDetails[0].resource_name;
+
+                // Calculate how many are allocated during this specific time slot
+                const [allocations] = await connection.execute(
+                    `SELECT COALESCE(SUM(br.quantity_used), 0) as allocated 
+                     FROM booking_resources br 
+                     JOIN bookings b ON br.booking_id = b.booking_id 
+                     WHERE br.resource_id = ? 
+                       AND b.booking_date = ? 
+                       AND b.status IN ('pending', 'approved') 
+                       AND (b.start_time < ? AND b.end_time > ?)`,
+                    [item.resource_id, booking_date, end_time, start_time]
+                );
+
+                const alreadyAllocated = Number(allocations[0].allocated);
+                const available = totalQuantity - alreadyAllocated;
+
+                if (item.quantity > available) {
+                    await connection.rollback();
+                    return res.status(409).json({ 
+                        message: `Resource Conflict: ${resourceName} Quantity = ${totalQuantity}, Already Allocated = ${alreadyAllocated}, User Requests = ${item.quantity}. Available = ${available}. Reject Request.`
+                    });
+                }
+            }
+
+            // Insert approved resources
             for (let item of resources) {
                 // Insert into booking_resources (Table 5)
                 await connection.execute(
@@ -42,7 +78,7 @@ exports.createBooking = async (req, res) => {
 
                 // Update available_quantity in resources (Table 3)
                 await connection.execute(
-                    `UPDATE resources SET available_quantity = available_quantity - ? WHERE resource_id = ?`,
+                    `UPDATE resources SET available_quantity = GREATEST(0, available_quantity - ?) WHERE resource_id = ?`,
                     [item.quantity, item.resource_id]
                 );
             }
