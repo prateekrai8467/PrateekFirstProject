@@ -31,7 +31,9 @@
             <div class="modal-content">
                 <h2>Request a Resource</h2>
                 <form id="bookResourceForm" onsubmit="submitBooking(event)">
-                    <input type="number" id="bookRoomId" placeholder="Room ID (e.g. 1)" required>
+                    <select id="bookRoomId" required>
+                        <option value="">Select Room</option>
+                    </select>
                     <input type="date" id="bookDate" required>
                     <div style="display: flex; gap: 10px;">
                         <input type="time" id="bookStart" required style="flex:1">

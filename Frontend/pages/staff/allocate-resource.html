@@ -26,8 +26,10 @@
         <div class="card" style="max-width: 600px; margin-top: 20px;">
             <form id="allocateResourceForm" onsubmit="submitStaffBooking(event)">
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label>Resource / Room ID</label>
-                    <input type="number" id="bookRoomId" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <label>Room</label>
+                    <select id="bookRoomId" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; background-color: #fff;">
+                        <option value="">Select Room</option>
+                    </select>
                 </div>
                 
                 <div class="form-group" style="margin-bottom: 15px;">
@@ -59,6 +61,26 @@
     <script src="../../assets/js/api.js"></script>
     <script src="../../assets/js/auth.js"></script>
     <script>
+        async function loadRooms() {
+            const select = document.getElementById('bookRoomId');
+            if (!select) return;
+
+            try {
+                const rooms = await API.request('/resources/rooms');
+                rooms.forEach(room => {
+                    const opt = document.createElement('option');
+                    opt.value = room.room_id;
+                    const formattedType = room.type ? room.type.charAt(0).toUpperCase() + room.type.slice(1).replace('_', ' ') : 'Room';
+                    opt.textContent = `${room.room_number} (${formattedType} - Cap: ${room.capacity})`;
+                    select.appendChild(opt);
+                });
+            } catch (error) {
+                console.error('Failed to load rooms:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadRooms);
+
         async function submitStaffBooking(e) {
             e.preventDefault();
             const userId = localStorage.getItem('userId');

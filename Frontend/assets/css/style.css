@@ -142,11 +142,12 @@ h1 {
     margin-top: 20px;
 }
 
-.modal-content input, .modal-content textarea {
+.modal-content input, .modal-content textarea, .modal-content select {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 14px;
+    background-color: #fff;
 }
 
 .modal-content .form-actions {

@@ -41,6 +41,25 @@ function openBookResourceModal() {
     if (modal) {
         modal.style.display = 'block';
         loadResources();
+        loadRooms();
+    }
+}
+
+async function loadRooms() {
+    const select = document.getElementById('bookRoomId');
+    if (!select || select.options.length > 1) return; // Already loaded or not present
+
+    try {
+        const rooms = await API.request('/resources/rooms');
+        rooms.forEach(room => {
+            const opt = document.createElement('option');
+            opt.value = room.room_id;
+            const formattedType = room.type ? room.type.charAt(0).toUpperCase() + room.type.slice(1).replace('_', ' ') : 'Room';
+            opt.textContent = `${room.room_number} (${formattedType} - Cap: ${room.capacity})`;
+            select.appendChild(opt);
+        });
+    } catch (error) {
+        console.error('Failed to load rooms:', error);
     }
 }
 

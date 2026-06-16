@@ -108,6 +108,9 @@ exports.createBooking = async (req, res) => {
         res.json({ message: "Booking request submitted", bookingId });
     } catch (error) {
         await connection.rollback();
+        if (error.errno === 1452) {
+            return res.status(400).json({ message: "Booking failed: The selected Room or User does not exist." });
+        }
         res.status(500).json({ message: "Booking failed: " + error.message, error: error.message });
     } finally {
         connection.release();

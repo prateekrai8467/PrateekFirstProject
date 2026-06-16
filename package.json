@@ -1,0 +1,9 @@
+{
+  "name": "minor-project-root",
+  "version": "1.0.0",
+  "description": "Root package runner for Minor Project",
+  "scripts": {
+    "start": "npm run start --prefix MVC_backend_auth",
+    "dev": "npm run dev --prefix MVC_backend_auth"
+  }
+}
