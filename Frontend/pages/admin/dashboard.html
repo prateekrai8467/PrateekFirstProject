@@ -26,26 +26,41 @@
 
     <div class="main-content">
         <h1>Admin Overview</h1>
-        <div class="stats-container">
+        <div class="stats-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
             <div class="card border-blue">
+                <h3>Total Rooms</h3>
+                <div class="value" id="totalRooms">0</div>
+            </div>
+            <div class="card border-green">
                 <h3>Total Resources</h3>
                 <div class="value" id="totalResources">0</div>
+            </div>
+            <div class="card border-blue">
+                <h3>Utilization</h3>
+                <div class="value" id="utilizationPercent">0%</div>
             </div>
             <div class="card border-green">
                 <h3>Total Allocations</h3>
                 <div class="value" id="activeAllocations">0</div>
             </div>
             <div class="card border-blue">
-                <h3>Total Users</h3>
-                <div class="value" id="totalUsers">0</div>
+                <h3>Most Used Room</h3>
+                <div class="value" id="mostUsedRoom" style="font-size: 1.5rem;">N/A</div>
             </div>
             <div class="card border-green">
-                <h3>Total Staff</h3>
-                <div class="value" id="totalStaff">0</div>
+                <h3>Most Used Resource</h3>
+                <div class="value" id="mostUsedResource" style="font-size: 1.5rem;">N/A</div>
             </div>
+        </div>
+
+        <div class="chart-container" style="margin-top: 40px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h2 style="margin-bottom: 20px;">Monthly Bookings (Current Year)</h2>
+            <canvas id="monthlyBookingsChart" style="max-height: 400px;"></canvas>
         </div>
     </div>
 
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../assets/js/api.js?v=2"></script>
     <script src="../../assets/js/utils.js?v=2"></script>
     <script src="../../assets/js/dashboard.js?v=2"></script>
