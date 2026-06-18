@@ -75,12 +75,6 @@ exports.createBooking = async (req, res) => {
                     `INSERT INTO booking_resources (booking_id, resource_id, quantity_used) VALUES (?, ?, ?)`,
                     [bookingId, item.resource_id, item.quantity]
                 );
-
-                // Update available_quantity in resources (Table 3)
-                await connection.execute(
-                    `UPDATE resources SET available_quantity = GREATEST(0, available_quantity - ?) WHERE resource_id = ?`,
-                    [item.quantity, item.resource_id]
-                );
             }
         }
 

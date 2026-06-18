@@ -3,6 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+// Initialize Event Listeners
+require('./listeners/bookingListeners');
+
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');

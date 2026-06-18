@@ -1,6 +1,7 @@
 /* src/controller/allocationController.js */
 const db = require('../config/db');
 const { sendBookingDecisionEmail } = require('../utils/emailService');
+const eventEmitter = require('../utils/eventEmitter');
 
 exports.approveOrRejectBooking = async (req, res) => {
     const connection = await db.getConnection();
@@ -23,7 +24,7 @@ exports.approveOrRejectBooking = async (req, res) => {
 
         await connection.commit();
 
-        // Emit real-time notification
+        // Emit real-time notification via Socket.IO
         const io = req.app.get('socketio');
         if (io) {
             io.emit('booking_status_updated', {
@@ -34,22 +35,32 @@ exports.approveOrRejectBooking = async (req, res) => {
             });
         }
 
-        // Fetch user email to send professional email notification
-        try {
-            const [userResult] = await db.execute(`
-                SELECT u.email, u.name 
-                FROM users u
-                JOIN bookings b ON u.user_id = b.user_id
-                WHERE b.booking_id = ?
-            `, [booking_id]);
+        // Event System: Emit booking.approved event if status is approved
+        if (status.toLowerCase() === 'approved') {
+            console.log(`📣 [Controller] Emitting 'booking.approved' for Booking #${booking_id}`);
+            eventEmitter.emit('booking.approved', {
+                bookingId: booking_id,
+                approvedBy: approved_by,
+                remarks: remarks
+            });
+        } else {
+            // For other statuses (like rejected), handle notification directly
+            try {
+                const [userResult] = await db.execute(`
+                    SELECT u.email, u.name 
+                    FROM users u
+                    JOIN bookings b ON u.user_id = b.user_id
+                    WHERE b.booking_id = ?
+                `, [booking_id]);
 
-            if (userResult.length > 0) {
-                const user = userResult[0];
-                // Dispatch email asynchronously (we don't await blocking here so the response is fast)
-                sendBookingDecisionEmail(user.email, user.name, booking_id, status, remarks);
+                if (userResult.length > 0) {
+                    const user = userResult[0];
+                    // Dispatch email asynchronously
+                    sendBookingDecisionEmail(user.email, user.name, booking_id, status, remarks);
+                }
+            } catch (emailErr) {
+                console.error("Error fetching user for email notification:", emailErr);
             }
-        } catch (emailErr) {
-            console.error("Error fetching user for email notification:", emailErr);
         }
 
         res.json({ message: `Booking ${status} successfully` });

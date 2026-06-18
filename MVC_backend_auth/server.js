@@ -4,6 +4,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const { errorHandler } = require('./src/middleware/errorMiddleware');
 
+// Initialize Event Listeners
+require('./src/listeners/bookingListeners');
+
 // Import all routes
 const authRoutes = require('./src/routes/authRoutes');
 const userRoutes = require('./src/routes/userRoutes');
